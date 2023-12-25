@@ -6,7 +6,8 @@ import {
   LogoBlock,
   ArrowIcon,
   MainContainer,
-} from "../styled-components/StylesForNavbar/Styles";
+  StyledSvg,
+} from "./StylesForNavbar/Styles";
 import SideBar from "./SideBar";
 
 const Navbar = () => {
@@ -19,20 +20,32 @@ const Navbar = () => {
   return (
     <MainContainer>
       <NavbarContainer>
-        <nav>
-          <div className="logo-block">
-            <LogoBlock>
-              <img src="" alt="Logo" />
-              <StyledLink onClick={toggleMenu}>Products</StyledLink>{" "}
-              <ArrowIcon onClick={toggleMenu}>▼</ArrowIcon>
-              <StyledLink>Enterprise</StyledLink>{" "}
-              <StyledLink>Customers</StyledLink>
-              <StyledLink>Company</StyledLink>
-            </LogoBlock>
-
-            <SideBar isMenuOpen={isMenuOpen} />
-          </div>
-        </nav>
+        <div className="logo-block">
+          <LogoBlock>
+            <img src="/NavbarImg/logo.png" alt="Logo" />
+            <StyledLink onClick={toggleMenu}>Products</StyledLink>{" "}
+            <ArrowIcon onClick={toggleMenu}>▼</ArrowIcon>
+            <StyledLink>Enterprise</StyledLink>{" "}
+            <StyledLink>Customers</StyledLink>
+            <StyledLink>Company</StyledLink>
+          </LogoBlock>
+          <StyledSvg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="5" cy="12" r="1"></circle>
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="19" cy="12" r="1"></circle>
+          </StyledSvg>{" "}
+          <SideBar isMenuOpen={isMenuOpen} />{" "}
+        </div>
       </NavbarContainer>
     </MainContainer>
   );

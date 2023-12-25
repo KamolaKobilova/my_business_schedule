@@ -5,6 +5,10 @@ import {
   ArrowIcon,
   DropdownMenu,
   MainContainer,
+  DropdownContent,
+  IconsForNavbar,
+  DropdownMiniBlock,
+  StyledSvg,
 } from ".";
 
 export {
@@ -14,4 +18,8 @@ export {
   LogoBlock,
   ArrowIcon,
   DropdownMenu,
+  DropdownContent,
+  IconsForNavbar,
+  DropdownMiniBlock,
+  StyledSvg,
 };
