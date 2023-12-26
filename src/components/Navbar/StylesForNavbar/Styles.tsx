@@ -9,6 +9,9 @@ import {
   IconsForNavbar,
   DropdownMiniBlock,
   StyledSvg,
+  AdditionalLinksContainer,
+  AccauntBlock,
+  Block,
 } from ".";
 
 export {
@@ -22,4 +25,7 @@ export {
   IconsForNavbar,
   DropdownMiniBlock,
   StyledSvg,
+  AdditionalLinksContainer,
+  AccauntBlock,
+  Block,
 };
