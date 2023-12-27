@@ -1,11 +1,10 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, useEffect } from "react";
 import {
   getAuth,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-// import firebase from "firebase/app";
 import app from "../../libs/firebase";
 import SignInCarousel from "./SignInCarousel";
 
@@ -21,15 +20,37 @@ import GoogleButton from "react-google-button";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirectToHome, setRedirectToHome] = useState(false);
 
   const auth = getAuth(app);
+
+  useEffect(() => {
+    if (redirectToHome) {
+      window.location.href = "/main-home-page";
+    }
+  }, [redirectToHome]);
 
   const handleEmailSignIn = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify({
+          uid: user.uid,
+          email: user.email,
+        })
+      );
+
       console.log("Successfully signed in with email!");
+      setRedirectToHome(true);
     } catch (error) {
       console.error("Error signing in with email:", (error as Error).message);
     }
@@ -39,8 +60,19 @@ const SignIn = () => {
     const provider = new GoogleAuthProvider();
 
     try {
-      await signInWithPopup(auth, provider);
+      const userCredential = await signInWithPopup(auth, provider);
+      const user = userCredential.user;
+
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify({
+          uid: user.uid,
+          email: user.email,
+        })
+      );
+
       console.log("Successfully signed in with Google!");
+      setRedirectToHome(true);
     } catch (error) {
       console.error("Error signing in with Google:", (error as Error).message);
     }
@@ -58,7 +90,6 @@ const SignIn = () => {
             <h1>Sign in</h1>
             <p>to access the home page </p>
             <form onSubmit={handleEmailSignIn}>
-              <label htmlFor="email">Email:</label>
               <input
                 type="email"
                 id="email"
@@ -68,8 +99,6 @@ const SignIn = () => {
                 placeholder="Enter your email"
                 required
               />
-
-              <label htmlFor="password">Password:</label>
               <input
                 type="password"
                 id="password"
@@ -79,10 +108,8 @@ const SignIn = () => {
                 placeholder="Enter your password"
                 required
               />
-
               <button type="submit">Sign In with Email</button>
             </form>
-
             <GoogleButton onClick={handleGoogleSignIn} />
           </InputBlock>
           <SignInCarousel />{" "}
