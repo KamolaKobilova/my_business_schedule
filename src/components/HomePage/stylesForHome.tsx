@@ -10,19 +10,20 @@ flex-direction: column;
 justify-content: center;
 font-size: 30px;
 `;
+
 export const Button = styled.button`
   display: inline-flex;
-height: 50px;
-padding: 17px 23px 17px 30px;
-justify-content: flex-end;
-align-items: flex-start;
-gap: 13.8px;
-flex-shrink: 0;
-width: 220px;
-border-radius: 2px;
-background-color: #F60014;
-border-color: #F60014;
-color: #FFFFFF;
+  height: 50px;
+  padding: 17px 23px 17px 30px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 13.8px;
+  flex-shrink: 0;
+  width: 220px;
+  border-radius: 2px;
+  background-color: #F60014;
+  border-color: #F60014;
+  color: #FFFFFF;
 
 
 `
@@ -48,12 +49,31 @@ export const Feature = styled.div`
   background: #FFF;border-radius: 5px;
   border: 1px solid #E7EBF0;
   background: #FFF;
+
+  li{
+ 
+    margin-left: -18px;
+    list-style: none;
+
+    img {
+      width: 70px;
+
+    }
+    
+  }
+  h2 {
+    color: #056CB8;
+  }
+ 
 `
+
 
 export const Region  = styled.div`
    width: 1107px;
    height: 205.3px;
    flex-shrink: 0;
-   background-color: #FFFFFF
+   background-color: #FFFFFF;
+   margin-left: 260px;
+   margin-top: 120px;
 
 `
