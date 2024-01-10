@@ -1,21 +1,14 @@
 import React from "react";
-import { render } from "react-dom";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ReactDOM from "react-dom";
 import App from "./App";
-import { MainHomePage } from "./Pages/MainHomePage";
-import SignIn from "./Pages/SignIn";
+import { firebaseConfig } from "./firebaseConfig";
 import "./index.css";
-// import reportWebVitals from "./reportWebVitals";
+// import firebase from 'firebase/app';
+// import 'firebase/auth';
 
-render(
+ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/main-home-page" element={<MainHomePage />} />
-      </Routes>
-    </Router>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
