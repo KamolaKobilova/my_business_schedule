@@ -3,9 +3,12 @@ import { StyledDiv, Button, Container, Picture, Feature, Region } from './styles
 import image from '../../assets/HomePgImage/Picture → zh-homev2-banner.webp.png';
 import zoho from '../../assets/HomePgImage/billing-logo.svg.svg';
 import girl from '../../assets/HomePgImage/Link → zh-announcement-billing.png.png'
+import Navbar from '../Navbar/Navbar';
 
 function index() {
   return (
+    <>
+    <Navbar/>
       <Container className="container">
           <div className="main_left">
              <StyledDiv className="text">
@@ -48,6 +51,8 @@ function index() {
             </div>
           </Feature>
       </Container>
+
+      </>
   )
 }
 

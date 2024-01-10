@@ -10,7 +10,7 @@ import {
   AccauntBlock,
   Block,
 } from "./StylesForNavbar/Styles";
-import { StyledButton } from "../../StyledButtons";
+// import { StyledButton } from "../Navbar/StylesForNavbar/";
 import SideBar from "./SideBar";
 import { NavLink } from "react-router-dom";
 
@@ -74,7 +74,7 @@ const Navbar = () => {
               {" "}
               <StyledLink variant="error"> Sign in</StyledLink>
             </NavLink>{" "}
-            <StyledButton variant="error">Sign up</StyledButton>{" "}
+            {/* <StyledButton variant="error">Sign up</StyledButton>{" "} */}
           </AccauntBlock>{" "}
         </Block>{" "}
       </MainContainer>{" "}

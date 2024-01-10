@@ -1,14 +1,22 @@
-import HomePage from './components/HomePage'
-import Navbar from "./components/Navbar";
+import HomePage from './components/HomePage/index'
+import Navbar from "./components/Navbar/Navbar";
 import { useFetchSchedules } from './hooks';
+import { 
+  BrowserRouter as Router, 
+  Route, 
+  Routes,
+} from "react-router-dom";
 
 function App() {
   const { schedules, loading } = useFetchSchedules();
 
   return (
     <>
-      <Navbar />
-      <HomePage/>
+  <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </Router>
     </>
   );
 }

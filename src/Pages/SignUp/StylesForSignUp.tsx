@@ -6,4 +6,4 @@ function StylesForSignUp() {
   )
 }
 
-export default StylesForSignUp
+export default StylesForSignUp;
