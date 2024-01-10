@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
+import GoogleButton from "react-google-button";
 const colors = {
   back: "#fcfcfc",
 };
@@ -8,7 +9,7 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 export const Back = styled.div`
-  /* background-image:url("./assets/SignInImg/back.png") */
+background-image:url('/assets/SignInImg/bg.svg')
   max-width: 1920px;
 `;
 export const SignInBlock = styled.div`
@@ -42,10 +43,8 @@ export const InputBlock = styled.div`
     width: 350px;
     height: 35px;
     padding-left: 10px;
-    border: none;
     border-radius: 3px;
     outline: none;
-    box-shadow: 0 4px 8px rgba(59, 58, 58, 0.5);
   }
   button {
     width: 360px;
@@ -56,6 +55,11 @@ export const InputBlock = styled.div`
     border: 1px solid #159aff;
     cursor: pointer;
     margin-top: 20px;
+  }
+  h3 {
+    display: flex;
+    color: #0e3067;
+    margin-left: 160px;
   }
 `;
 export const StyledCard = styled.div`
@@ -82,4 +86,9 @@ export const StyledImg = styled.img`
   width: 80px;
   height: 350px;
   border-radius: 200px, 0 0 20px;
+`;
+export const StyledGoogleButton = styled(GoogleButton)`
+  display: flex;
+
+  margin: 20px 0 0 55px;
 `;
