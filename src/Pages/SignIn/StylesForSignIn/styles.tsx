@@ -7,6 +7,7 @@ import {
   Back,
   InputBlock,
   CustomCarousel,
+  StyledGoogleButton,
 } from ".";
 
 export {
@@ -18,4 +19,5 @@ export {
   Back,
   InputBlock,
   CustomCarousel,
+  StyledGoogleButton,
 };

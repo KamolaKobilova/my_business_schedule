@@ -1,9 +1,11 @@
 // import Navbar from "../../components/Navbar";
+
+import { HomePageNav } from "./HomePageNav/HomePageNav";
+
 export const MainHomePage = () => {
   return (
     <>
-      {/* <Navbar />; */}
-      <h1>Main Home Page</h1>
+      <HomePageNav />
     </>
   );
 };

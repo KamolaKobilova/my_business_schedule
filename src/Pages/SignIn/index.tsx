@@ -13,9 +13,9 @@ import {
   SignInBlock,
   Back,
   InputBlock,
+  StyledGoogleButton,
 } from "./StylesForSignIn/styles";
 import { NavLink } from "react-router-dom";
-import GoogleButton from "react-google-button";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -110,7 +110,8 @@ const SignIn = () => {
               />
               <button type="submit">Sign In with Email</button>
             </form>
-            <GoogleButton onClick={handleGoogleSignIn} />
+            <h3>Or</h3>
+            <StyledGoogleButton onClick={handleGoogleSignIn} />
           </InputBlock>
           <SignInCarousel />{" "}
         </SignInBlock>
