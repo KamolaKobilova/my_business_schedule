@@ -1,10 +1,9 @@
 import React from "react";
+import styled from "styled-components";
 
 export const stylesForHome = () => {
   return <div>stylesForHome</div>;
 };
-
-import styled from "styled-components";
 
 export const StyledDiv = styled.div`
   display: flex;

@@ -34,9 +34,9 @@ const Navbar = () => {
                   alt="Logo"
                   style={{ marginRight: "15px" }}
                 />
-                <StyledLink onClick={toggleMenu}>Products</StyledLink>{" "}
+                <StyledLink onClick={toggleMenu}>Products</StyledLink>
                 <ArrowIcon onClick={toggleMenu}>▼</ArrowIcon>
-                <StyledLink>Enterprise</StyledLink>{" "}
+                <StyledLink>Enterprise</StyledLink>
                 <StyledLink>Customers</StyledLink>
                 <StyledLink>Company</StyledLink>
                 <StyledSvg
@@ -65,19 +65,17 @@ const Navbar = () => {
                   <StyledLink href="#">Support</StyledLink>
                   <StyledLink href="#">Contact us</StyledLink>
                 </AdditionalLinksContainer>
-              </LogoBlock>{" "}
-            </div>{" "}
-          </NavbarContainer>{" "}
+              </LogoBlock>
+            </div>
+          </NavbarContainer>
           <AccauntBlock>
-            {" "}
             <NavLink to="/sign-in" style={{ textDecoration: "none" }}>
-              {" "}
               <StyledLink variant="error"> Sign in</StyledLink>
-            </NavLink>{" "}
-            {/* <StyledButton variant="error">Sign up</StyledButton>{" "} */}
-          </AccauntBlock>{" "}
-        </Block>{" "}
-      </MainContainer>{" "}
+            </NavLink>
+            {/* <StyledButton variant="error">Sign up</StyledButton> */}
+          </AccauntBlock>
+        </Block>
+      </MainContainer>
       <SideBar isMenuOpen={isMenuOpen} />
     </>
   );
