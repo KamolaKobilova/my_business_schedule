@@ -26,7 +26,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (redirectToHome) {
-      window.location.href = "/main-home-page";
+      window.location.href = "/home-page-nav";
     }
   }, [redirectToHome]);
 

@@ -3,8 +3,9 @@ import {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
-  ModalContainer,
-} from "../StylesForMainHomePage";
+  ModalContainer,Header
+} from "./BookingStyles";
+import logo from '../../../assets/BookingPage/logo.png'
 
 interface CalendarModalProps {
   onClose: () => void;
@@ -17,7 +18,11 @@ export const CalendarModal: React.FC<CalendarModalProps> = ({ onClose }) => {
         <ModalCloseButton onClick={onClose}>&times;</ModalCloseButton>
         <ModalContainer>
           <div className="switch-block">
+           <Header>
+           <img src={logo} alt="" />
             <h1>Bookings</h1>
+           </Header>
+           
             <h3>Hi there,User</h3>
             <p>
               Welcome to Zoho Bookings. We’ll help you find the perfect time

@@ -8,6 +8,9 @@ export const Navbar = styled.nav`
   gap: 20px;
   background-color: ${mainPurple};
 `;
+export const Header = styled.div`
+    
+`
 
 export const NavButton = styled.button`
   color: white;

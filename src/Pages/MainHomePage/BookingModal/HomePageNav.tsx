@@ -1,7 +1,7 @@
 import React from "react";
-import { NavButton, Navbar } from "../StylesForMainHomePage";
+import { NavButton, Navbar } from "./BookingStyles";
 import { useState } from "react";
-import { CalendarModal } from "../CalendarModal";
+import { CalendarModal } from "./BookingPage";
 
 export const HomePageNav = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,11 +18,11 @@ export const HomePageNav = () => {
   return (
     <Navbar>
       <div></div>
-      <NavButton onClick={handleOpenModal}>Calendar</NavButton>
+      <NavButton >Calendar</NavButton>
       <NavButton>Services</NavButton>
       <NavButton>Staff</NavButton>
       <NavButton>My profile</NavButton>
-      <NavButton>Booking page</NavButton>
+      <NavButton onClick={handleOpenModal}>Booking page</NavButton>
       {isModalOpen && <CalendarModal onClose={handleCloseModal} />}
     </Navbar>
   );

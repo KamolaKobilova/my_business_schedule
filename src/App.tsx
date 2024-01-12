@@ -4,7 +4,8 @@ import Navbar from "./components/Navbar/Navbar";
 import { useFetchSchedules } from "./hooks";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignIn from "./Pages/SignIn";
-import { MainHomePage } from "./Pages/MainHomePage/MainHomeStyles";
+// import { MainHomePage } from "./Pages/MainHomePage/MainHomeStyles";
+import { HomePageNav } from "./Pages/MainHomePage/BookingModal/HomePageNav";
 
 function App() {
   const { schedules, loading } = useFetchSchedules();
@@ -18,7 +19,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             {/* <Route path="/" element={<Navbar />} /> */}
             <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/main-home-page" element={<MainHomePage />} />
+            <Route path="/home-page-nav" element={<HomePageNav />} />
           </Routes>
         </Router>
       </>
