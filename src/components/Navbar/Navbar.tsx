@@ -72,6 +72,9 @@ const Navbar = () => {
             <NavLink to="/sign-in" style={{ textDecoration: "none" }}>
               <StyledLink variant="error"> Sign in</StyledLink>
             </NavLink>
+            {/* <NavLink>
+            <StyledLink variant="error"> Sign Up</StyledLink>
+            </NavLink> */}
             {/* <StyledButton variant="error">Sign up</StyledButton> */}
           </AccauntBlock>
         </Block>
