@@ -1,13 +1,7 @@
-import React, { FormEvent, useState, useEffect } from "react";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import app from "../../libs/firebase";
+import React, { FormEvent, useState, useEffect, useReducer } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useQueryClient, useMutation } from "react-query";
 import SignInCarousel from "./SignInCarousel";
-
 import {
   Container,
   SignInBlock,
@@ -15,67 +9,88 @@ import {
   InputBlock,
   StyledGoogleButton,
 } from "./StylesForSignIn/styles";
-import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../useReducer/authslice";
 
-const SignIn = () => {
+type SignInFormData = {
+  email: string;
+  password: string;
+};
+
+interface SignInState {
+  redirectToHome: boolean;
+}
+
+const initialState: SignInState = {
+  redirectToHome: false,
+};
+
+const signInReducer = (
+  state: SignInState,
+  action: { type: string; payload?: any }
+) => {
+  switch (action.type) {
+    case "SET_REDIRECT_TO_HOME":
+      return { ...state, redirectToHome: action.payload };
+    default:
+      return state;
+  }
+};
+
+const signInFn = async (formData: SignInFormData) => {
+  try {
+    const response = await axios.post(
+      "https://icare-api-3zia.onrender.com/api/auth/login",
+      formData
+    );
+
+    if (!response.data.token) {
+      throw new Error("Token not received from the server");
+    }
+
+    return response.data.token;
+  } catch (error: any) {
+    throw new Error(`Error signing in: ${error.message}`);
+  }
+};
+
+const SignIn: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [redirectToHome, setRedirectToHome] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const auth = getAuth(app);
+  const [state, dispatchSignIn] = useReducer(signInReducer, initialState);
+
+  const mutation = useMutation(
+    (formData: SignInFormData) => signInFn(formData),
+    {
+      onSuccess: (token: string) => {
+        dispatch(setToken(token));
+        dispatchSignIn({ type: "SET_REDIRECT_TO_HOME", payload: true });
+      },
+      onError: (error: Error) => {
+        console.error(error.message);
+      },
+    }
+  );
 
   useEffect(() => {
-    if (redirectToHome) {
-      window.location.href = "/main-home-page";
+    if (state.redirectToHome && !mutation.isLoading && !mutation.isError) {
+      navigate("/main-home-page");
     }
-  }, [redirectToHome]);
+  }, [state.redirectToHome, mutation.isLoading, mutation.isError, navigate]);
 
   const handleEmailSignIn = async (e: FormEvent) => {
     e.preventDefault();
 
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
+    const formData: SignInFormData = {
+      email: "sanjarbekweb@gmail.com",
+      password: "123456",
+    };
 
-      localStorage.setItem(
-        "currentUser",
-        JSON.stringify({
-          uid: user.uid,
-          email: user.email,
-        })
-      );
-
-      console.log("Successfully signed in with email!");
-      setRedirectToHome(true);
-    } catch (error) {
-      console.error("Error signing in with email:", (error as Error).message);
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-
-    try {
-      const userCredential = await signInWithPopup(auth, provider);
-      const user = userCredential.user;
-
-      localStorage.setItem(
-        "currentUser",
-        JSON.stringify({
-          uid: user.uid,
-          email: user.email,
-        })
-      );
-
-      console.log("Successfully signed in with Google!");
-      setRedirectToHome(true);
-    } catch (error) {
-      console.error("Error signing in with Google:", (error as Error).message);
-    }
+    mutation.mutate(formData);
   };
 
   return (
@@ -84,7 +99,6 @@ const SignIn = () => {
         <SignInBlock>
           <InputBlock>
             <NavLink to="/">
-              {" "}
               <img src="/assets/SignInImg/logo.png" alt="Logo" />
             </NavLink>
             <h1>Sign in</h1>
@@ -108,12 +122,14 @@ const SignIn = () => {
                 placeholder="Enter your password"
                 required
               />
-              <button type="submit">Sign In with Email</button>
+              <button type="submit" disabled={mutation.isLoading}>
+                {mutation.isLoading ? "Signing In..." : "Sign In"}
+              </button>
             </form>
             <h3>Or</h3>
-            <StyledGoogleButton onClick={handleGoogleSignIn} />
+            <StyledGoogleButton />
           </InputBlock>
-          <SignInCarousel />{" "}
+          <SignInCarousel />
         </SignInBlock>
       </Back>
     </Container>
