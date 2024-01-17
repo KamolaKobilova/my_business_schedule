@@ -17,7 +17,10 @@ export const FullPageCalendar = styled.div`
     background-color: white;
     border: 1px solid #cbc8c8;
     font-size: 15px;
+    text-align: right;
+    vertical-align: top;
     cursor: pointer;
+    padding: 10px;
     &:hover {
       background-color: #f6f3f3;
     }

@@ -1,6 +1,8 @@
 import React, { FormEvent, useState, useEffect, useReducer } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useQueryClient, useMutation } from "react-query";
+import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import SignInCarousel from "./SignInCarousel";
 import {
   Container,
@@ -9,8 +11,7 @@ import {
   InputBlock,
   StyledGoogleButton,
 } from "./StylesForSignIn/styles";
-import axios from "axios";
-import { useDispatch } from "react-redux";
+
 import { setToken } from "../../useReducer/authslice";
 
 type SignInFormData = {
@@ -69,12 +70,27 @@ const SignIn: React.FC = () => {
       onSuccess: (token: string) => {
         dispatch(setToken(token));
         dispatchSignIn({ type: "SET_REDIRECT_TO_HOME", payload: true });
+
+        localStorage.setItem("authToken", token);
       },
       onError: (error: Error) => {
         console.error(error.message);
       },
     }
   );
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const storedToken = localStorage.getItem("authToken");
+
+      if (storedToken) {
+        dispatch(setToken(storedToken));
+        dispatchSignIn({ type: "SET_REDIRECT_TO_HOME", payload: true });
+      }
+    };
+
+    checkToken();
+  }, [dispatch, dispatchSignIn]);
 
   useEffect(() => {
     if (state.redirectToHome && !mutation.isLoading && !mutation.isError) {
