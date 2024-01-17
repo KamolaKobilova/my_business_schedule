@@ -55,11 +55,13 @@ export const InputBlock = styled.div`
     border: 1px solid #159aff;
     cursor: pointer;
     margin-top: 20px;
+    font-size: 20px;
   }
   h3 {
     display: flex;
     color: #0e3067;
     margin-left: 160px;
+    margin-top: 20px;
   }
 `;
 export const StyledCard = styled.div`
@@ -84,11 +86,11 @@ export const CustomCarousel = styled(Carousel)`
 `;
 export const StyledImg = styled.img`
   width: 80px;
-  height: 350px;
+  height: 360px;
   border-radius: 200px, 0 0 20px;
 `;
 export const StyledGoogleButton = styled(GoogleButton)`
   display: flex;
-
+  font-size: 20px;
   margin: 20px 0 0 55px;
 `;
