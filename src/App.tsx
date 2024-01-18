@@ -14,7 +14,7 @@ import SignIn from "./Pages/SignIn";
 import SignUpForm from "./Pages/SignUp/SignUpForm";
 import HomePage from "./components/HomePage";
 import { CalendarComponent } from "./Pages/MainHomePage/Calendar/CalendarComponent";
-import MainHomepage from "./Pages/MainHomePage/MainHomePage";
+import { MainHomePage } from "./Pages/MainHomePage/MainHomePage";
 const queryClient = new QueryClient();
 
 function App() {
@@ -35,13 +35,19 @@ function App() {
 
   return (
     <>
+      {/* {" "}
+      <SignUpForm
+        onSignUpSuccess={function (token: string): void {
+          throw new Error("Function not implemented.");
+        }}
+      /> */}
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           <Router>
             <Routes>
               {isUserAuthenticated ? (
                 <>
-                  <Route path="/main-home-page" element={<MainHomepage />} />
+                  <Route path="/main-home-page" element={<MainHomePage />} />
                   <Route path="/calendar" element={<CalendarComponent />} />
                 </>
               ) : (
@@ -49,12 +55,6 @@ function App() {
               )}
             </Routes>
             <Routes>
-              <SignUpForm
-                onSignUpSuccess={function (token: string): void {
-                  throw new Error("Function not implemented.");
-                }}
-              />
-
               <Route path="/" element={<HomePage />} />
               <Route path="/sign-in" element={<SignIn />} />
             </Routes>
