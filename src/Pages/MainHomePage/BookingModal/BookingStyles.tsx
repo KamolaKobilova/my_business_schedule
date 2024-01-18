@@ -8,6 +8,59 @@ export const Navbar = styled.nav`
   gap: 20px;
   background-color: ${mainPurple};
 `;
+ export const ButtonNext = styled.nav`
+   display: flex;
+   height: 22px;
+   width: 100px;
+   padding: 11.5px 15px;
+   justify-content: center;
+   align-items: center;
+   gap: 0.595px;
+   background-color: #4F4A7B;
+   color: white;
+   border-radius: 2px;
+   margin-left: 220px;
+   margin-top: 40px;
+  
+ `
+export const Title = styled.div`
+  p{
+    max-width: 290px;
+    font-family: Inter;
+    font-size: 13.563px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+  }
+`
+export  const  Input = styled.div`
+   margin-top: 30px;
+  input, select{
+    width: 342px;
+    height: 40px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    border-radius: 3px;
+    border: 1px solid ;
+    color: #111111;
+     }
+  
+  label{
+    font-family: "Inherit";
+    font-size: 17.438px;
+    margin-bottom: 10px;
+  }
+  
+  
+`
+export const Header = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-left: 10px;
+    
+
+`
 
 export const NavButton = styled.button`
   color: white;
@@ -53,6 +106,7 @@ export const ModalCloseButton = styled.button`
 `;
 export const ModalContainer = styled.div`
   display: flex;
+
 
   .switch-block {
     display: flex;

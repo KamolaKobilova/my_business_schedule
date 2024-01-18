@@ -1,12 +1,11 @@
 import React from "react";
-import { NavButton, Navbar } from "../StylesForMainHomePage";
+import { NavButton, Navbar } from "./BookingStyles";
 import { useState } from "react";
-import { CalendarModal } from "../CalendarModal";
-import { NavLink } from "react-router-dom";
+import { CalendarModal } from "./BookingPage";
 
 export const HomePageNav = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
     console.log("modal open");
@@ -19,10 +18,7 @@ export const HomePageNav = () => {
   return (
     <Navbar>
       <div></div>
-
-      <NavLink to="/calendar">
-        <NavButton>Calendar</NavButton>
-      </NavLink>
+      <NavButton >Calendar</NavButton>
       <NavButton>Services</NavButton>
       <NavButton>Staff</NavButton>
       <NavButton>My profile</NavButton>

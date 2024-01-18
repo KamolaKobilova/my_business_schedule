@@ -5,18 +5,23 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
+
 import { Provider, useDispatch, useSelector } from "react-redux";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { setToken } from "./store/authslice";
 import store, { RootState } from "./store/store";
 import SignIn from "./Pages/SignIn";
-import { MainHomePage } from "./Pages/MainHomePage/MainHomeStyles";
+import SignUpForm from "./Pages/SignUp/SignUpForm";
 import HomePage from "./components/HomePage";
 import { CalendarComponent } from "./Pages/MainHomePage/Calendar/CalendarComponent";
-
+import MainHomepage from "./Pages/MainHomePage/MainHomePage";
 const queryClient = new QueryClient();
 
 function App() {
+  const handleSignUpSuccess = (token: string) => {
+    console.log("Sign-up successful! Token:", token);
+  };
+
   const dispatch = useDispatch();
 
   const storedToken = localStorage.getItem("authToken");
@@ -36,7 +41,7 @@ function App() {
             <Routes>
               {isUserAuthenticated ? (
                 <>
-                  <Route path="/main-home-page" element={<MainHomePage />} />
+                  <Route path="/main-home-page" element={<MainHomepage />} />
                   <Route path="/calendar" element={<CalendarComponent />} />
                 </>
               ) : (
@@ -44,6 +49,12 @@ function App() {
               )}
             </Routes>
             <Routes>
+              <SignUpForm
+                onSignUpSuccess={function (token: string): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+
               <Route path="/" element={<HomePage />} />
               <Route path="/sign-in" element={<SignIn />} />
             </Routes>

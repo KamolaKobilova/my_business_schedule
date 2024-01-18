@@ -1,9 +1,12 @@
-import React from 'react'
+import styled from "styled-components"
 
-function StylesForSignUp() {
-  return (
-    <div>StylesForSignUp</div>
-  )
-}
+export const MainItem = styled.div`
+   align-items: center;
+   width: auto;
+   height: "200px";
+  
 
-export default StylesForSignUp;
+  
+
+`
+
