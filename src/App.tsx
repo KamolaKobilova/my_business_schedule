@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import { setToken } from "./useReducer/authslice";
-import store, { RootState } from "./useReducer/store";
+import { setToken } from "./store/authslice";
+import store, { RootState } from "./store/store";
 import SignIn from "./Pages/SignIn";
 import { MainHomePage } from "./Pages/MainHomePage/MainHomeStyles";
 import HomePage from "./components/HomePage";
@@ -34,37 +34,18 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Router>
             <Routes>
+              {isUserAuthenticated ? (
+                <>
+                  <Route path="/main-home-page" element={<MainHomePage />} />
+                  <Route path="/calendar" element={<CalendarComponent />} />
+                </>
+              ) : (
+                <Route path="*" element={<Navigate to="/sign-in" replace />} />
+              )}
+            </Routes>
+            <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route
-                path="/sign-in"
-                element={
-                  isUserAuthenticated ? (
-                    <Navigate to="/main-home-page" />
-                  ) : (
-                    <SignIn />
-                  )
-                }
-              />
-              <Route
-                path="/main-home-page"
-                element={
-                  isUserAuthenticated ? (
-                    <MainHomePage />
-                  ) : (
-                    <Navigate to="/sign-in" />
-                  )
-                }
-              />
-              <Route
-                path="/calendar"
-                element={
-                  isUserAuthenticated ? (
-                    <CalendarComponent />
-                  ) : (
-                    <Navigate to="/sign-in" />
-                  )
-                }
-              />
+              <Route path="/sign-in" element={<SignIn />} />
             </Routes>
           </Router>
         </QueryClientProvider>
@@ -72,5 +53,4 @@ function App() {
     </>
   );
 }
-
 export default App;

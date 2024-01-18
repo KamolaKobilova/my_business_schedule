@@ -1,8 +1,9 @@
+import axios from "axios";
 import React, { FormEvent, useState, useEffect, useReducer } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+import { useMutation } from "react-query";
+
 import SignInCarousel from "./SignInCarousel";
 import {
   Container,
@@ -11,32 +12,12 @@ import {
   InputBlock,
   StyledGoogleButton,
 } from "./StylesForSignIn/styles";
-
-import { setToken } from "../../useReducer/authslice";
+import signInReducer, { initialState } from "../../store/signInReducer";
+import { setToken } from "../../store/authslice";
 
 type SignInFormData = {
   email: string;
   password: string;
-};
-
-interface SignInState {
-  redirectToHome: boolean;
-}
-
-const initialState: SignInState = {
-  redirectToHome: false,
-};
-
-const signInReducer = (
-  state: SignInState,
-  action: { type: string; payload?: any }
-) => {
-  switch (action.type) {
-    case "SET_REDIRECT_TO_HOME":
-      return { ...state, redirectToHome: action.payload };
-    default:
-      return state;
-  }
 };
 
 const signInFn = async (formData: SignInFormData) => {
@@ -64,20 +45,21 @@ const SignIn: React.FC = () => {
 
   const [state, dispatchSignIn] = useReducer(signInReducer, initialState);
 
-  const mutation = useMutation(
-    (formData: SignInFormData) => signInFn(formData),
-    {
-      onSuccess: (token: string) => {
-        dispatch(setToken(token));
-        dispatchSignIn({ type: "SET_REDIRECT_TO_HOME", payload: true });
+  const {
+    mutate: signInMutation,
+    isLoading,
+    isError,
+  } = useMutation((formData: SignInFormData) => signInFn(formData), {
+    onSuccess: (token: string) => {
+      dispatch(setToken(token));
+      dispatchSignIn({ type: "SET_REDIRECT_TO_HOME", payload: true });
 
-        localStorage.setItem("authToken", token);
-      },
-      onError: (error: Error) => {
-        console.error(error.message);
-      },
-    }
-  );
+      localStorage.setItem("authToken", token);
+    },
+    onError: (error: Error) => {
+      console.error(error.message);
+    },
+  });
 
   useEffect(() => {
     const checkToken = async () => {
@@ -93,10 +75,10 @@ const SignIn: React.FC = () => {
   }, [dispatch, dispatchSignIn]);
 
   useEffect(() => {
-    if (state.redirectToHome && !mutation.isLoading && !mutation.isError) {
+    if (state.redirectToHome && !isLoading && !isError) {
       navigate("/main-home-page");
     }
-  }, [state.redirectToHome, mutation.isLoading, mutation.isError, navigate]);
+  }, [state.redirectToHome, isLoading, isError, navigate]);
 
   const handleEmailSignIn = async (e: FormEvent) => {
     e.preventDefault();
@@ -106,7 +88,7 @@ const SignIn: React.FC = () => {
       password: "123456",
     };
 
-    mutation.mutate(formData);
+    signInMutation(formData);
   };
 
   return (
@@ -138,8 +120,8 @@ const SignIn: React.FC = () => {
                 placeholder="Enter your password"
                 required
               />
-              <button type="submit" disabled={mutation.isLoading}>
-                {mutation.isLoading ? "Signing In..." : "Sign In"}
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? "Signing In..." : "Sign In"}
               </button>
             </form>
             <h3>Or</h3>
