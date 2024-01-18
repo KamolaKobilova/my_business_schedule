@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { firebaseConfig } from "./firebaseConfig";
 import "./index.css";
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById("root")
 );

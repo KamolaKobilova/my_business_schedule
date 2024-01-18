@@ -1,38 +1,67 @@
 import React from "react";
-import HomePage from "./components/HomePage";
-import Navbar from "./components/Navbar/Navbar";
-import { useFetchSchedules } from "./hooks";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import SignIn from "./Pages/SignIn";
-// import { MainHomePage } from "./Pages/MainHomePage/MainHomeStyles";
-import { HomePageNav } from "./Pages/MainHomePage/BookingModal/HomePageNav";
-import SignUpForm from "./Pages/SignUp/SignUpForm";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 
+import { Provider, useDispatch, useSelector } from "react-redux";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { setToken } from "./store/authslice";
+import store, { RootState } from "./store/store";
+import SignIn from "./Pages/SignIn";
+import SignUpForm from "./Pages/SignUp/SignUpForm";
+import HomePage from "./components/HomePage";
+import { CalendarComponent } from "./Pages/MainHomePage/Calendar/CalendarComponent";
+import MainHomepage from "./Pages/MainHomePage/MainHomePage";
+const queryClient = new QueryClient();
 
 function App() {
   const handleSignUpSuccess = (token: string) => {
-    console.log('Sign-up successful! Token:', token);
+    console.log("Sign-up successful! Token:", token);
   };
-  const { schedules, loading } = useFetchSchedules();
-  if (false) {
-    return <h1>Protected routes</h1>;
-  } else {
-    return (
-      <>
-      <SignUpForm onSignUpSuccess={function (token: string): void {
-          throw new Error("Function not implemented.");
-        } }/>
-        {/* <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUpForm onSignUpSuccess={handleSignUpSuccess}/>}/>
-            <Route path="/home-page-nav" element={<HomePageNav />} />
-          </Routes>
-        </Router> */}
-      </>
-    );
-  }
-}
 
+  const dispatch = useDispatch();
+
+  const storedToken = localStorage.getItem("authToken");
+
+  if (storedToken) {
+    dispatch(setToken(storedToken));
+  }
+
+  const token = useSelector((state: RootState) => state.auth.token);
+  const isUserAuthenticated = !!token;
+
+  return (
+    <>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <Router>
+            <Routes>
+              {isUserAuthenticated ? (
+                <>
+                  <Route path="/main-home-page" element={<MainHomepage />} />
+                  <Route path="/calendar" element={<CalendarComponent />} />
+                </>
+              ) : (
+                <Route path="*" element={<Navigate to="/sign-in" replace />} />
+              )}
+            </Routes>
+            <Routes>
+              <SignUpForm
+                onSignUpSuccess={function (token: string): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+
+              <Route path="/" element={<HomePage />} />
+              <Route path="/sign-in" element={<SignIn />} />
+            </Routes>
+          </Router>
+        </QueryClientProvider>
+      </Provider>
+    </>
+  );
+}
 export default App;
