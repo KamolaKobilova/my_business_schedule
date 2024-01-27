@@ -3,40 +3,41 @@ import axios from "axios";
 import { Form, Input, Button, Checkbox } from "antd";
 
 import { NavbarSignUp } from "./NavbarSignUp";
-interface SignUpFormProps {
-  onSignUpSuccess: (token: string) => void;
-}
+import { useHook } from "./useHook";
+// interface SignUpFormProps {
+//   onSignUpSuccess: (token: string) => void;
+// }
 
-const SignUpForm: React.FC<SignUpFormProps> = ({ onSignUpSuccess }) => {
-  const handleSignUp = async () => {
-    try {
-      const response = await axios.post(
-        "https://icare-api-3zia.onrender.com/api/auth/sign-up",
-        formData
-      );
-      const token = response.data.token;
-      console.log(token);
+const SignUpForm: React.FC = () => {
+  // const handleSignUp = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "https://icare-api-3zia.onrender.com/api/auth/sign-up",
+  //       formData
+  //     );
+  //     const token = response.data.token;
+  //     console.log(token);
 
-      onSignUpSuccess(token);
-    } catch (error) {
-      console.error("Sign-up failed:", "Unknown error");
-    }
-  };
+  //     onSignUpSuccess(token);
+  //   } catch (error) {
+  //     console.error("Sign-up failed:", "Unknown error");
+  //   }
+  // };
 
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   username: "",
+  //   email: "",
+  //   password: "",
+  // });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
+  const { handleSignUp } = useHook();
   return (
     <>
       <NavbarSignUp />
@@ -58,6 +59,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignUpSuccess }) => {
           initialValues={{ remember: true }}
           style={{ maxWidth: "500px", margin: "auto" }}
           layout="vertical"
+          onFinish={handleSignUp}
         >
           <Form.Item
             label="Full Name"

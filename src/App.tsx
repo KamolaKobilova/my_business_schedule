@@ -1,4 +1,3 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -8,10 +7,10 @@ import {
 
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { setToken } from "./store/authslice";
-import store, { RootState } from "./store/store";
+import { setToken } from "./redux/authSlice";
+import store, { RootState } from "./redux/store";
 import SignIn from "./Pages/SignIn";
-import SignUpForm from "./Pages/SignUp/SignUpForm";
+// import SignUpForm from "./Pages/SignUp/SignUpForm";
 import HomePage from "./components/HomePage";
 import { CalendarComponent } from "./Pages/MainHomePage/Calendar/CalendarComponent";
 import { MainHomePage } from "./Pages/MainHomePage/MainHomePage";

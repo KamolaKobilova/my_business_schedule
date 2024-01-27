@@ -12,8 +12,8 @@ import {
   InputBlock,
   StyledGoogleButton,
 } from "./StylesForSignIn/styles";
-import signInReducer, { initialState } from "../../store/signInReducer";
-import { setToken } from "../../store/authslice";
+import signInReducer, { initialState } from "../../redux/signInReducer";
+import { setToken } from "../../redux/authSlice";
 
 type SignInFormData = {
   email: string;

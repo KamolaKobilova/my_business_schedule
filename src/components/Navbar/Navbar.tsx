@@ -14,8 +14,8 @@ import {
 } from "./StylesForNavbar/Styles";
 // import { StyledButton } from "../Navbar/StylesForNavbar/";
 import SideBar from "./SideBar";
-import { setToken } from "../../store/authslice";
-import { RootState } from "../../store/store";
+import { setToken } from "../../redux/authSlice";
+import { RootState } from "../../redux/store";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
