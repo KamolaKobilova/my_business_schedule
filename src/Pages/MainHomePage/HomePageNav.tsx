@@ -82,14 +82,14 @@ export const HomePageNav = () => {
             onMouseLeave={() => setIsHovered(false)}
           />
         </Dropdown>
-        <BellOutlined
+        {/* <BellOutlined
          style={{ fontSize: '24px',
          color: isCHanging ? '#F8F8F8' : '#D3D3D3',
          width: '15px'
           }}
           onMouseEnter={() => setIsChanging(true)}
           onMouseLeave={() => setIsChanging(false)}
-          />
+          /> */}
          </NavRight>  
          <NavRight>
           <img src="" alt="/" style={{width: "140px", height: "100px", borderRadius:"50%", border:"2px solid white"}} />

@@ -11,10 +11,8 @@ import image from "../../assets/HomePgImage/Picture → zh-homev2-banner.webp.pn
 import zoho from "../../assets/HomePgImage/billing-logo.svg.svg";
 import girl from "../../assets/HomePgImage/Link → zh-announcement-billing.png.png";
 import Navbar from "../Navbar/Navbar";
-// import Redux from "../../Redux";
-// import { CheckRedux } from "../../CheckRedux";
 
-function index() {
+function HomePage() {
   return (
     <>
       <Navbar />
@@ -22,7 +20,7 @@ function index() {
         <div className="main_left">
           <StyledDiv className="text">
             <h2>
-              Your life's work, <br /> powered by our life's work
+              Your life&apos;s work, <br /> powered by our life&apos;s work
             </h2>
             <p>
               A unique and powerful software suite to transform the <br /> way
@@ -33,7 +31,6 @@ function index() {
               Get Started For Free <br />
               <img src="" alt="" />{" "}
             </Button>
-            {/* <Redux></Redux> */}
           </StyledDiv>
           <Picture>
             <img src={image} alt="" />
@@ -62,7 +59,6 @@ function index() {
         </div>
         <Feature className="main_right">
           {" "}
-          {/* <CheckRedux /> */}
           <div className="feature">
             <p style={{ marginTop: 20 }}>FEATURED APPS</p>
             <ul style={{ listStyle: "none" }}>
@@ -99,4 +95,4 @@ function index() {
   );
 }
 
-export default index;
+export default HomePage;
